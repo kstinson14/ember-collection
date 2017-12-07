@@ -46,9 +46,7 @@ export default Ember.Component.extend({
     //   2. Set a property on `this` that is both not in the
     //      initial attrs hash and not on the prototype.
     this._super();
-  },
 
-  didInitAttrs() {
     let buffer = this.getAttr('buffer'); // getIntAttr('buffer', 5)
     this._buffer = (typeof buffer === 'number') ? buffer : 5;
     this._scrollLeft = this.getAttr('scroll-left') | 0;
@@ -82,7 +80,7 @@ export default Ember.Component.extend({
     if (this._rawItems !== rawItems) {
       if (this._items && this._items.removeArrayObserver) {
         this._items.removeArrayObserver(this, {
-          willChange: Ember.K,
+          willChange: {},
           didChange: '_needsRevalidate'
         });
       }
@@ -92,7 +90,7 @@ export default Ember.Component.extend({
 
       if (items && items.addArrayObserver) {
         items.addArrayObserver(this, {
-          willChange: Ember.K,
+          willChange: {},
           didChange: '_needsRevalidate'
         });
       }
